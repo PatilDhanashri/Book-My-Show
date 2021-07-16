@@ -2,9 +2,9 @@ import React from "react";
 
 //components
 import EntertainmentCardSlider from "../components/Entertainment/EntertainmentCard.component";
-import Premier from "../components/Premier/Premier.components";
+import PosterSlider from "../components/PosterSlider/PosterSlider.component";
 //congif
-import TempImages from "../Config/TempPoster.config";
+import TempPoster from "../Config/TempPoster.config";
 const Homepage=()=>{
 
     return (
@@ -26,12 +26,33 @@ const Homepage=()=>{
                         className="w-full h-full"/>
                     </div>
                 </div>
-                <Premier/>
+                <PosterSlider 
+                    images={TempPoster} 
+                    title="Premieres" 
+                    Subtitle="Brand new relases every friday"
+                    isDark
+                />
                 </div>
         </div>
         </div>
-       </>
+
+       <div className="containex mx-auto px-4 my-8">
+         <PosterSlider 
+                images={TempPoster} 
+                title="Online Streaming events" 
+                isDark={false}     
+            />
+       </div>
+
+       <div className="containex mx-auto px-4 my-8">
+         <PosterSlider 
+                images={TempPoster} 
+                title="Outdoor event" 
+                isDark={false}     
+            />
+       </div>
          
+       </> 
     );
         
 };
