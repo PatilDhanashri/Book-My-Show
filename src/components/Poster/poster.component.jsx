@@ -27,3 +27,4 @@ const Poster = (props) => {
     </>
   );
 };
+export default Poster;
