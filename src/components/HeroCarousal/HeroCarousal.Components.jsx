@@ -1,6 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import HeroSlider from "react-slick";
-
+import axios  from "axios";
 //components
 import {NextArrow,PrevArrow} from "./Arrows.Componants";
 
@@ -11,6 +11,17 @@ import {NextArrow,PrevArrow} from "./Arrows.Componants";
 
 
 const  HeroCarousal   = ()=>{
+   
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const requestNowPlayingMovies = async () => {
+      const getImages = await axios.get("/movie/now_playing");
+      setImages(getImages.data.results);
+    };
+
+    requestNowPlayingMovies();
+  }, []);
 
     const settingsLG={
       arrows:true,
@@ -35,13 +46,13 @@ const  HeroCarousal   = ()=>{
     
       };
 
-      const images =[
-            "https://images.unsplash.com/photo-1515041219749-89347f83291a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
-            "https://images.unsplash.com/photo-1623432532623-f8f1347d954c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-            "https://images.unsplash.com/photo-1605217613423-0a61bd725c8a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80",
-            "https://images.unsplash.com/photo-1626042060264-e23ecaa9ddbc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=336&q=80",
-            "https://images.unsplash.com/photo-1626074961596-cab914d9392e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=664&q=80"
-      ];
+      // const images =[
+      //       "https://images.unsplash.com/photo-1515041219749-89347f83291a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+      //       "https://images.unsplash.com/photo-1623432532623-f8f1347d954c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+      //       "https://images.unsplash.com/photo-1605217613423-0a61bd725c8a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80",
+      //       "https://images.unsplash.com/photo-1626042060264-e23ecaa9ddbc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=336&q=80",
+      //       "https://images.unsplash.com/photo-1626074961596-cab914d9392e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=664&q=80"
+      // ];
       
       return (
         <>
@@ -49,7 +60,11 @@ const  HeroCarousal   = ()=>{
             <HeroSlider {...settings}>
               {images.map((image) => (
                 <div className="w-full h-56 md:h-80 py-3 ">
-                  <img src={image} alt="testing" className="w-full h-full" />
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
+                    alt="testing"
+                    className="w-full h-full"
+                  />
                 </div>
               ))}
             </HeroSlider>
@@ -60,7 +75,7 @@ const  HeroCarousal   = ()=>{
               {images.map((image) => (
                 <div className="w-full h-96 px-2 py-3">
                   <img
-                    src={image}
+                    src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                     alt="testing"
                     className="w-full h-full rounded-md"
                   />
