@@ -1,11 +1,46 @@
-import React from "react";
 
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 //components
 import EntertainmentCardSlider from "../components/Entertainment/EntertainmentCard.component";
 import PosterSlider from "../components/PosterSlider/PosterSlider.component";
 //congif
-import TempPoster from "../Config/TempPoster.config";
-const Homepage=()=>{
+//  import TempPoster from "../Config/TempPoster.config";
+
+const Homepage = () => {
+
+  const [popularMovies, setPopularMovies] = useState([]);
+   const [topRatedMovies, setTopRatedMovies] = useState([]);
+   const [upcomingMovies, setUpcomingMovies] = useState([]);
+
+  useEffect(() => {
+    const requestPopularMovies = async () => {
+      const getPopularMovies = await axios.get("/movie/popular");
+      setPopularMovies(getPopularMovies.data.results);
+    };
+
+    requestPopularMovies();
+  }, []);
+ console.log({popularMovies});
+
+  useEffect(() => {
+    const requestTopRatedMovies = async () => {
+      const getTopRatedMovies = await axios.get("/movie/top_rated");
+      setTopRatedMovies(getTopRatedMovies.data.results);
+    };
+
+    requestTopRatedMovies();
+  }, []);
+
+  useEffect(() => {
+    const requestUpcomingMovies = async () => {
+      const getUpcomingMovies = await axios.get("/movie/upcoming");
+      setUpcomingMovies(getUpcomingMovies.data.results);
+    };
+
+    requestUpcomingMovies();
+  }, []);
+
 
     return (
        <> 
@@ -27,7 +62,7 @@ const Homepage=()=>{
                     </div>
                 </div>
                 <PosterSlider 
-                    images={TempPoster} 
+                    images={popularMovies}
                     title="Premieres" 
                     Subtitle="Brand new relases every friday"
                     isDark
@@ -38,7 +73,7 @@ const Homepage=()=>{
 
        <div className="containex mx-auto px-4 my-8">
          <PosterSlider 
-                images={TempPoster} 
+                images={topRatedMovies} 
                 title="Online Streaming events" 
                 isDark={false}     
             />
@@ -46,8 +81,8 @@ const Homepage=()=>{
 
        <div className="containex mx-auto px-4 my-8">
          <PosterSlider 
-                images={TempPoster} 
-                title="Outdoor event" 
+                images={upcomingMovies} 
+                title="Outdoor events" 
                 isDark={false}     
             />
        </div>

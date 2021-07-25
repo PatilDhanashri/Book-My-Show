@@ -1,4 +1,4 @@
- import axios from "axios";
+import axios from "axios";
 
 // HOC
 import DefaultHOC from "./HOC/Default.HOC";
@@ -27,4 +27,3 @@ function App() {
 }
 
 export default App;
- 

@@ -1,4 +1,4 @@
-import { FaCcVisa, FaCcApplePay, FaAppleAlt } from "react-icons/fa";
+import { FaCcVisa, FaCcApplePay} from "react-icons/fa";
 //component
 import Cast from "../components/Cast/Cast.component";
 import React from 'react'
@@ -158,4 +158,3 @@ const Movie = () => {
 
 export default Movie;
 
- 
